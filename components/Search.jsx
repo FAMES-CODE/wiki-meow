@@ -40,7 +40,7 @@ function Search({ index }) {
                         </h1>
                       </a>
                     );
-                  }
+                  }  
                 })}
               </div>
             ) : (

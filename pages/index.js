@@ -1,4 +1,5 @@
 import React from "react";
+import Footer from "../components/Footer";
 import Search from "../components/Search";
 
 export default function Home() {
@@ -28,21 +29,21 @@ export default function Home() {
       </header>
       <main className="relative min-h-screen p-4  xl:p-16 bg-red-100 ">
         <div className="p-4  ">
-          <h6 className="mb-8">Most searched breeds</h6>
+         
           <div className="flex justify-between items-end">
             <h1 className="text-2xl w-full font-bold xl:text-5xl xl:w-2/5">
               66+ Breeds For You to discover now !
             </h1>
-            <a href="/breeds" className="hidden xl:block w-1/6">SEE MORE </a>
+            <a href="/breeds" className="hidden xl:block  px-6 py-2 border-2 border-gray-800 text-gray-800 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out xl:mt-28">SEE MORE </a>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-8 xl:grid-cols-4 xl:gap-4 h-full ">
+        <div className="my-36 grid grid-cols-2 gap-8 xl:grid-cols-4 xl:gap-4 h-full ">
           {breeds
             ? breeds.slice(0, 4).map((x) => {
                 return (
                   <div className="relative">
-                    <a href={`/${x.id}`} className="grayscale hover:grayscale-0 h-full  ">
+                    <a href={`/breeds/${x.id}`} className="grayscale hover:grayscale-0 h-full  ">
                       <img
                         className="object-cover object-center h-full w-full"
                         src={x.image.url}
@@ -68,7 +69,7 @@ export default function Home() {
             chemicals in your body which lower your stress and anxiety leves
           </p>
 
-          <a className="my-8 xl:mt-28">Read more</a>
+          <a href="https://www.mentalfloss.com/article/51154/10-scientific-benefits-being-cat-owner" className="my-8 inline-block px-6 py-2 border-2 border-gray-800 text-gray-800 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out xl:mt-28">Read more</a>
         </div>
         <section class="w-full overflow-hidden text-gray-700">
           <div class="container px-5 py-2 mx-auto lg:pt-24 lg:px-32">
@@ -123,7 +124,7 @@ export default function Home() {
           </div>
         </section>
       </div>
-      <footer className=""></footer>
+       <Footer />
     </div>
   );
 }
