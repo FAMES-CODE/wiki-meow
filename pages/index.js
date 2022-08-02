@@ -18,8 +18,8 @@ export default function Home() {
     <div>
       <header className="flex xl: bg-black text-white">
         <div className="w-full flex  flex-col justify-center items-center">
-          <h1 className="my-2 mx-1 text-4xl xl:text-6xl">Wiki Meow</h1>
-          <h2 className="my-2 mx-1 text-3xl xl:text-5xl mb-6">The cat wiki</h2>
+          <h1 className="my-2 font-bold mx-1 text-4xl xl:text-6xl">Wiki Meow</h1>
+          <h2 className="my-2 font-semibold mx-1 text-3xl xl:text-5xl mb-6">The cat wiki</h2>
           <Search className="my-2 mx-1 " index={breeds} />
         </div>
 
@@ -42,16 +42,17 @@ export default function Home() {
           {breeds
             ? breeds.slice(0, 4).map((x) => {
                 return (
-                  <div className="relative">
-                    <a href={`/breeds/${x.id}`} className="grayscale hover:grayscale-0 h-full  ">
+                  <div className="relative xl:mx-6 border-r-4 border-red-500 border-solid">
+                    <a href={`/breeds/${x.id}`} className="flex justify-center items-center flex-row-reverse  grayscale hover:grayscale-0 h-full  ">
                       <img
                         className="object-cover object-center h-full w-full"
                         src={x.image.url}
                       />
-                    </a>
-                      <h2 className="absolute bottom-0 text-center backdrop-blur-sm bg-purple-500/50 w-full font-bold rounded-t-xl">
+                      
+                      <h2 className="absolute w-full rounded-t-xl uppercase left-0 h-full  font-bold xl:text-xl xl:-rotate-90 hover:rotate-0 ease-in duration-200">
                         {x.name}
                       </h2>
+                    </a>
                   </div>
                 );
               })
