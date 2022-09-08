@@ -14,12 +14,15 @@ function Breed() {
   var { id } = router.query;
 
   const getBreed = async () => {
+    // Get informations about the breed
     var call = await fetch(`https://api.thecatapi.com/v1/breeds/${id}`);
     var response = await call.json();
+    // Get main image of the breed
     var callimg = await fetch(
       `https://api.thecatapi.com/v1/images/${response.reference_image_id}`
-    );
-    var responseimg = await callimg.json();
+      );
+      var responseimg = await callimg.json();
+    // Get other images of the breed
     var callimgs = await fetch(
       `https://api.thecatapi.com/v1/images/search?breed_ids=${id}&limit=8`
     );
@@ -28,7 +31,7 @@ function Breed() {
     setBreedimgurl(responseimg);
     setBreedimgs(responseimgs);
     setLoaded(true);
-    console.log(response);
+   
   };
 
   React.useEffect(() => {
@@ -104,7 +107,7 @@ function Breed() {
                     <span className="font-bold">Weight :</span>{" "}
                     <div className="flex flex-col">
                       <span>{breed.weight.imperial} Pounds (lbs)</span>
-                      <span>{breed.weight.metric} Kilogram (Kg)</span>
+                      <span>{breed.weight.metric} Kilograms (Kg)</span>
                     </div>
                   </li>
                   {breed.adaptability ? (

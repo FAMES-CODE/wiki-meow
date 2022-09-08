@@ -1,6 +1,7 @@
 import React from "react";
 
 function Rating({ index }) {
+  // Rating components 
   if (index == 1)
     return (
       <div class="w-1/4 bg-gray-200 rounded-full dark:bg-gray-700">

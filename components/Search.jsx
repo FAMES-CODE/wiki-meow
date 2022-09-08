@@ -1,6 +1,7 @@
 import React from "react";
 
 function Search({ index }) {
+  // Search component 
   const [search, setSearch] = React.useState("");
 
   return (

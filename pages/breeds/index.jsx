@@ -1,6 +1,6 @@
 import React from "react";
 import Footer from "../../components/Footer";
-import Search from "../../components/Search";
+
 
 function index() {
   const [data, setData] = React.useState([]);
