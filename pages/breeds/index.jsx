@@ -1,4 +1,5 @@
 import React from "react";
+import Head from 'next/head'
 import Footer from "../../components/Footer";
 
 
@@ -23,6 +24,10 @@ function index() {
 
   return (
     <div>
+      <Head>
+        <title>Wiki Meow | Breeds</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       {loaded ? (
         <div>
           <div className="">

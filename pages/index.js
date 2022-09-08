@@ -1,6 +1,7 @@
 import React from "react";
 import Footer from "../components/Footer";
 import Search from "../components/Search";
+import Head from 'next/head'
 
 export default function Home() {
   const [breeds, setBreeds] = React.useState([]);
@@ -16,6 +17,10 @@ export default function Home() {
   }, []);
   return (
     <div>
+       <Head>
+        <title>Wiki Meow</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <header className="flex xl: bg-black text-white">
         <div className="w-full flex  flex-col justify-center items-center">
           <h1 className="my-2 font-bold mx-1 text-4xl xl:text-6xl">Wiki Meow</h1>

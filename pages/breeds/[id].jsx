@@ -2,6 +2,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import Rating from "../../components/Rating";
 import Footer from './../../components/Footer';
+import Head from 'next/head'
 
 function Breed() {
   const [breed, setBreed] = React.useState([]);
@@ -42,7 +43,10 @@ function Breed() {
   return (
     <div >
       <div className="m-2 xl:m-14">
-        
+      <Head>
+        <title>Wiki Meow | {breed ? breed.name : id}</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       {loaded ? (
         <div className="flex flex-col justify-around items-start">
           <div className="flex flex-col xl:flex-row  justify-around items-start">
