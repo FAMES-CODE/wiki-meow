@@ -1,13 +1,12 @@
-import React from "react";
-import Head from 'next/head'
+import React, { useState } from "react";
+import Head from "next/head";
 import Footer from "../../components/Footer";
-
 
 function index() {
   const [data, setData] = React.useState([]);
   const [datatofetch, setDatatofetch] = React.useState(7);
   const [loaded, setLoaded] = React.useState(false);
-
+  const [breedImgUrls, setBreedImgUrls] = React.useState([]);
   const getallBreeds = async (numberOfContent) => {
     var call = await fetch(
       `https://api.thecatapi.com/v1/breeds?limit=${numberOfContent}`
@@ -22,6 +21,25 @@ function index() {
     getallBreeds(datatofetch);
   }, []);
 
+  const getBreedImages = async () => {
+    const promises = data.map(async (x) => {
+      const call = await fetch(
+        `https://api.thecatapi.com/v1/images/${x.reference_image_id}`
+      );
+      const response = await call.json();
+      return response.url;
+    });
+
+    const urls = await Promise.all(promises);
+    setBreedImgUrls(urls);
+  };
+
+  React.useEffect(() => {
+    if (data.length > 0) {
+      getBreedImages();
+    }
+  }, [data]);
+
   return (
     <div>
       <Head>
@@ -31,7 +49,23 @@ function index() {
       {loaded ? (
         <div>
           <div className="">
-            <div className="font-bold text-2xl rounded-b-xl p-4 fixed w-full text-center top-0 bg-blue-500 w-f">
+            <div className="flex items-center font-bold justify-center text-4xl ">
+              <svg
+                aria-hidden="true"
+                focusable="false"
+                data-prefix="fas"
+                data-icon="cat"
+                class="w-8 h-8"
+                role="img"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 512 512"
+              >
+                <path
+                  fill="currentColor"
+                  d="M290.59 192c-20.18 0-106.82 1.98-162.59 85.95V192c0-52.94-43.06-96-96-96-17.67 0-32 14.33-32 32s14.33 32 32 32c17.64 0 32 14.36 32 32v256c0 35.3 28.7 64 64 64h176c8.84 0 16-7.16 16-16v-16c0-17.67-14.33-32-32-32h-32l128-96v144c0 8.84 7.16 16 16 16h32c8.84 0 16-7.16 16-16V289.86c-10.29 2.67-20.89 4.54-32 4.54-61.81 0-113.52-44.05-125.41-102.4zM448 96h-64l-64-64v134.4c0 53.02 42.98 96 96 96s96-42.98 96-96V32l-64 64zm-72 80c-8.84 0-16-7.16-16-16s7.16-16 16-16 16 7.16 16 16-7.16 16-16 16zm80 0c-8.84 0-16-7.16-16-16s7.16-16 16-16 16 7.16 16 16-7.16 16-16 16z"
+                ></path>
+              </svg>
+
               <a
                 className="underline underline-offset-4 decoration-4 decoration-blue-600"
                 href="/"
@@ -39,15 +73,16 @@ function index() {
                 The Wiki Meow
               </a>
             </div>
-            {data.map((x) => {
+            {data.map((x, index) => {
               return (
                 <a
+                  key={x.id}
                   href={`./breeds/${x.id}`}
                   className="flex flex-col-reverse  m-16  xl:flex-row  items-center xl:m-24 xl:hover:bg-black/10 rounded-2xl border-b-4"
                 >
                   <img
                     className="w-56 h-56 rounded-2xl object-cover object-center"
-                    src={x.image ? x.image.url : ""}
+                    src={breedImgUrls[index] || ""}
                     alt=""
                   />
                   <div className=" xl:mx-8">

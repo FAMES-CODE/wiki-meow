@@ -6,7 +6,7 @@ import Head from 'next/head'
 export default function Home() {
   const [breeds, setBreeds] = React.useState([]);
   const getBreeds = async () => {
-    var call = await fetch("https://api.thecatapi.com/v1/breeds");
+    var call = await fetch("https://api.thecatapi.com/v1/breeds?api_key=" + process.env.NEXT_PUBLIC_API_KEY);
     var response = await call.json();
     setBreeds(response);
     console.log(response);
@@ -15,6 +15,7 @@ export default function Home() {
   React.useEffect(() => {
     getBreeds();
   }, []);
+
   return (
     <div>
        <Head>
@@ -47,7 +48,7 @@ export default function Home() {
           {breeds
             ? breeds.slice(0, 4).map((x) => {
                 return (
-                  <div className="relative xl:mx-6 border-r-4 border-red-500 border-solid">
+                  <div key={x.id} className="relative xl:mx-6 border-r-4 border-red-500 border-solid">
                     <a href={`/breeds/${x.id}`} className="flex justify-center items-center flex-row-reverse  grayscale hover:grayscale-0 h-full  ">
                       <img
                         className="object-cover object-center h-full w-full"
